@@ -11,32 +11,79 @@ tool were renamed in 1.1.0 and the old name is no longer maintained.
 
 ## Install
 
-From npm (the plain name works once published — nothing has to guess a GitHub
-repository from a scope):
+### DSH Desktop
+
+1. Open **Settings → Plugins**.
+2. Pick **Installed** and use the install field there (**Install from npm or
+   GitHub**), or open the **Plugin Market** tab and paste the same spec into its
+   search box.
+3. Enter `@codefoxs/dsh-efforts-detector` and install.
+
+The app writes the package into the Desktop profile
+(`~/.dsh/profiles/desktop`) and activates it without a restart — the entry
+`efforts-detector` shows up under **Installed** and is already syncing. Nothing
+in `cordis.patch.yml` needs a hand edit: the bundle carries its own patch, and
+the only row it inserts is `efforts-detector` with `routes: []`.
+
+If Desktop is set to the China download region, the install goes through
+`registry.npmmirror.com`. A version published minutes ago can still be missing
+there while the mirror catches up; retry, or install from GitHub for that one
+version (see below).
+
+### Command line or `dsh web`
+
+`plugin_manager` is the same installer the app calls — use whichever you have:
 
 ```text
-plugin_manager install_bundle target: "dsh-efforts-detector"
+plugin_manager install_bundle target: "@codefoxs/dsh-efforts-detector"
 ```
 
-Pinned to a release, or straight from this repository:
+Pinned to the latest release, or straight from the repository (no registry at all):
 
 ```text
-plugin_manager install_bundle target: "dsh-efforts-detector@1.1.0"
-plugin_manager install_bundle target: "github:codefoxs/dsh-efforts-detector#v1.1.0"
+plugin_manager install_bundle target: "@codefoxs/dsh-efforts-detector@1.1.1"
+plugin_manager install_bundle target: "github:codefoxs/dsh-efforts-detector#v1.1.1"
 ```
 
-A `@scope/name` spec is NOT a shorthand for `github:scope/name`: pnpm reads it
-as an npm package under that scope and fails with 404 unless it is actually
-published there. Use `github:` when you mean GitHub.
+A local checkout works too: pass its absolute directory as `target`, which is
+what a development loop looks like (a `link:` install follows the working tree,
+so `set_plugin` disabled then enabled reloads your edits).
 
-Or from the plugin market, or by cloning this repository and passing its
-directory as `target`. The bundle declares its own patch, so it inserts itself
-and needs no hand edit of `cordis.patch.yml`; the only row it adds is
-`efforts-detector` with `routes: []`, which means every eligible route.
+### What `@scope/name` does and does not mean
 
-Requires DSH with the `llm-pi-ai` plugin (the stock model provider layer). The
-plugin imports nothing outside Node's built-ins, so it works wherever the
-profile resolves it from.
+`@codefoxs/dsh-efforts-detector` is an npm package name, not a shorthand for
+the GitHub repository `codefoxs/dsh-efforts-detector`. pnpm reads a scoped name
+as a registry lookup and fails with 404 unless the package is published there;
+only `github:`, `gitlab:` and `bitbucket:` route to git. Use `github:` when you
+mean GitHub, and the plain scoped name when you mean npm.
+
+### Requirements
+
+A DSH installation with the `llm-pi-ai` plugin — the stock model provider
+layer, present in every profile. The plugin imports nothing but Node's built-in
+modules, so it activates wherever the profile resolves it from, including a
+`link:` install of a local checkout.
+
+## Usage
+
+Out of the box nothing has to be clicked: the plugin syncs on its own after an
+import, after an edit in Settings → Models, and after the config file is
+written from outside DSH (`## When it runs` has the exact triggers). That is the
+whole point — "fetch available models" keeps four fields from the listing
+(`id`, `name`, `contextWindow`, `maxTokens`) and drops the reasoning levels,
+and this puts them back within seconds.
+
+To force a pass, call the `efforts_detector_sync` tool from the agent, or:
+
+```text
+efforts_detector_sync({ dryRun: true })        # report what would change
+efforts_detector_sync()                        # apply it
+efforts_detector_sync({ routes: ["magpie"] })  # one route only
+```
+
+`routes` defaults to every eligible route: a route with a non-empty `models`
+list, a `baseURL`, and an `api` the plugin knows how to talk to. The bundle's own
+config sets `routes: []`, which means the same thing as omitting it.
 
 ## Why it is needed
 
