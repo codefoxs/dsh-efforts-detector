@@ -424,7 +424,7 @@ export function apply(ctx, config = {}) {
 
   const note = (message) => {
     try {
-      ctx.logger?.info?.(`[reasoning-efforts] ${message}`)
+      ctx.logger?.info?.(`[efforts-detector] ${message}`)
     } catch {
       // Logging is best effort; a logger that rejects the call must not fail a sync.
     }
@@ -512,7 +512,7 @@ export function apply(ctx, config = {}) {
 
   ctx.inject(['tools'], (sctx) => {
     sctx.tools.register({
-      name: 'reasoning_efforts_sync',
+      name: 'efforts_detector_sync',
       description: 'Read the model listing of one or more pi-ai routes and write each model\'s reasoning levels back into its `reasoningEfforts`. Use it after importing models, or when a model\'s reasoning selector offers the wrong levels. Every route that publishes a model listing is synced unless specific routes are named. The plugin also runs this automatically whenever the config document changes.',
       parameters: {
         type: 'object',
@@ -591,7 +591,7 @@ export function apply(ctx, config = {}) {
         return { routes: results.map(toToolRow) }
       },
     })
-    note('registered the reasoning_efforts_sync tool')
+    note('registered the efforts_detector_sync tool')
   })
 }
 

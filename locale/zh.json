@@ -1,6 +1,6 @@
 {
   "meta": {
     "title": "推理档位回填",
-    "description": "把服务商模型清单里的推理档位抄回每个模型的 reasoningEfforts，让档位选择器与服务商真实提供的档位一致。只要路由能公布模型清单就适用，OpenAI、Responses、Anthropic、Gemini 都覆盖。配置一变就自动执行，启动时也跑一次，需要立即刷新时用 reasoning_efforts_sync 工具手动触发。只写 DSH 支持的七档：none 记作 off，ultra 占用 max 槽位，清单里查不到的模型保持原样。"
+    "description": "把服务商模型清单里的推理档位抄回每个模型的 reasoningEfforts，让档位选择器与服务商真实提供的档位一致。只要路由能公布模型清单就适用，OpenAI、Responses、Anthropic、Gemini 都覆盖。配置一变就自动执行，启动时也跑一次，需要立即刷新时用 efforts_detector_sync 工具手动触发。只写 DSH 支持的七档：none 记作 off，ultra 占用 max 槽位，清单里查不到的模型保持原样。"
   }
 }

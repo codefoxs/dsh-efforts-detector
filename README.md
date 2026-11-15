@@ -1,18 +1,24 @@
-# Reasoning level backfill
+# dsh-efforts-detector
 
 A DSH plugin that puts each model's reasoning levels back into the profile after
-a model import drops them.
+a model import drops them. It reads the levels the endpoint itself publishes, so
+it needs no per-vendor knowledge base: any gateway that advertises
+`reasoning_levels` in its model listing is covered, whether the plugin has ever
+heard of the model or not.
+
+Formerly published as `dsh-reasoning-efforts`; the package, bundle entry, and
+tool were renamed in 1.1.0 and the old name is no longer maintained.
 
 ## Install
 
 ```text
-plugin_manager install_bundle target: "github:codefoxs/dsh-reasoning-efforts"
+plugin_manager install_bundle target: "github:codefoxs/dsh-efforts-detector"
 ```
 
 Or from the plugin market, or by cloning this repository and passing its
 directory as `target`. The bundle declares its own patch, so it inserts itself
 and needs no hand edit of `cordis.patch.yml`; the only row it adds is
-`reasoning-efforts` with `routes: []`, which means every eligible route.
+`efforts-detector` with `routes: []`, which means every eligible route.
 
 Requires DSH with the `llm-pi-ai` plugin (the stock model provider layer). The
 plugin imports nothing outside Node's built-ins, so it works wherever the
@@ -49,7 +55,7 @@ a gateway therefore still gets its levels from the OpenAI-shaped listing.
 - **Automatically**, when the profile's YAML files change on disk, which covers
   hand edits and edits made by other tools.
 - **Automatically**, once shortly after the plugin starts.
-- **On demand**, through the `reasoning_efforts_sync` tool: pass `dryRun: true`
+- **On demand**, through the `efforts_detector_sync` tool: pass `dryRun: true`
   to see what would change without writing.
 
 A run that finds nothing to change writes nothing, so the automatic trigger
@@ -80,8 +86,8 @@ usable level (image and video models), are left exactly as they are.
 The plugin row in `cordis.patch.yml` takes:
 
 ```yaml
-- id: reasoning-efforts
-  name: 'dsh-reasoning-efforts'
+- id: efforts-detector
+  name: 'dsh-efforts-detector'
   config:
     routes: []         # route keys under llm-pi-ai.providers; empty = every eligible route
     auto: true         # run on config changes
