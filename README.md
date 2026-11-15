@@ -11,9 +11,23 @@ tool were renamed in 1.1.0 and the old name is no longer maintained.
 
 ## Install
 
+From npm (the plain name works once published — nothing has to guess a GitHub
+repository from a scope):
+
 ```text
-plugin_manager install_bundle target: "github:codefoxs/dsh-efforts-detector"
+plugin_manager install_bundle target: "dsh-efforts-detector"
 ```
+
+Pinned to a release, or straight from this repository:
+
+```text
+plugin_manager install_bundle target: "dsh-efforts-detector@1.1.0"
+plugin_manager install_bundle target: "github:codefoxs/dsh-efforts-detector#v1.1.0"
+```
+
+A `@scope/name` spec is NOT a shorthand for `github:scope/name`: pnpm reads it
+as an npm package under that scope and fails with 404 unless it is actually
+published there. Use `github:` when you mean GitHub.
 
 Or from the plugin market, or by cloning this repository and passing its
 directory as `target`. The bundle declares its own patch, so it inserts itself
