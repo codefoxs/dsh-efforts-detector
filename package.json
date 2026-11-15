@@ -1,5 +1,5 @@
 {
-  "name": "dsh-efforts-detector",
+  "name": "@codefoxs/dsh-efforts-detector",
   "version": "1.1.0",
   "description": "Backfill reasoningEfforts on DSH pi-ai routes from the model listing each route publishes.",
   "type": "module",

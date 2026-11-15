@@ -1,5 +1,5 @@
 - insert:
     - id: efforts-detector
-      name: 'dsh-efforts-detector'
+      name: '@codefoxs/dsh-efforts-detector'
       config:
         routes: []
