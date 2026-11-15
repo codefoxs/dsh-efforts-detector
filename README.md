@@ -41,8 +41,8 @@ plugin_manager install_bundle target: "@codefoxs/dsh-efforts-detector"
 Pinned to the latest release, or straight from the repository (no registry at all):
 
 ```text
-plugin_manager install_bundle target: "@codefoxs/dsh-efforts-detector@1.1.1"
-plugin_manager install_bundle target: "github:codefoxs/dsh-efforts-detector#v1.1.1"
+plugin_manager install_bundle target: "@codefoxs/dsh-efforts-detector@1.1.2"
+plugin_manager install_bundle target: "github:codefoxs/dsh-efforts-detector#v1.1.2"
 ```
 
 A local checkout works too: pass its absolute directory as `target`, which is
