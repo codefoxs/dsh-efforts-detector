@@ -1,0 +1,5 @@
+- insert:
+    - id: reasoning-efforts
+      name: 'dsh-reasoning-efforts'
+      config:
+        routes: []

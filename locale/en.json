@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Reasoning level backfill",
+    "description": "Copies each model's reasoning levels from the route's own model listing into its reasoningEfforts, so the level selector matches what the provider really serves. Any route that publishes a listing is covered, whether it speaks OpenAI, Responses, Anthropic, or Gemini. It runs after every config change and on start, and the reasoning_efforts_sync tool forces a run. Only DSH's seven levels are written: none becomes off, ultra takes the max slot, and models the listing does not describe are left untouched."
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "name": "dsh-reasoning-efforts",
+  "version": "1.0.0",
+  "description": "Backfill reasoningEfforts on DSH pi-ai routes from the model listing each route publishes.",
+  "type": "module",
+  "license": "MIT",
+  "author": "CodeFox",
+  "homepage": "https://github.com/codefoxs/dsh-reasoning-efforts#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codefoxs/dsh-reasoning-efforts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/codefoxs/dsh-reasoning-efforts/issues"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "reasoning-effort",
+    "llm"
+  ],
+  "exports": {
+    ".": "./index.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}
